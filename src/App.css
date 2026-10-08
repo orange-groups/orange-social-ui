@@ -11,7 +11,7 @@
 }
 
 .logo { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); text-decoration: none; font-size: 24px; font-weight: 700; letter-spacing: -1px; }
-.logo-mark, .mini-logo { display: grid; place-items: center; border-radius: 50%; background: var(--orange); color: white; font-family: 'DM Serif Display', serif; font-style: italic; }
+.logo-mark, .mini-logo { display: grid; place-items: center; border-radius: 50%; background: var(--orange); color: white; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-style: italic; }
 .logo-mark { width: 31px; height: 31px; font-size: 24px; }
 .nav-links { display: flex; align-items: center; gap: 36px; }
 .nav-links > a:not(.button) { font-size: 14px; font-weight: 600; text-decoration: none; position: relative; }
@@ -34,9 +34,9 @@
 .eyebrow, .kicker { text-transform: uppercase; letter-spacing: 2.4px; font-size: 11px; font-weight: 700; }
 .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
 .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 5px rgba(255, 90, 31, .14); }
-h1, h2 { font-family: 'DM Serif Display', serif; font-weight: 400; margin: 0; letter-spacing: -2px; line-height: .98; }
+h1, h2 { font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-weight: 600; margin: 0; letter-spacing: -.04em; line-height: 1.08; }
 h1 { font-size: clamp(64px, 7vw, 108px); max-width: 650px; }
-h1 em, h2 em { color: var(--orange); font-weight: 400; }
+h1 em, h2 em { color: var(--orange); font-weight: 600; }
 .hero-description { max-width: 535px; font-size: 17px; line-height: 1.65; color: #675b54; margin: 30px 0; }
 .hero-actions { display: flex; align-items: center; gap: 28px; }
 .people-row { display: flex; align-items: center; gap: 18px; margin-top: 42px; }
@@ -64,7 +64,7 @@ h1 em, h2 em { color: var(--orange); font-weight: 400; }
 .post-author strong { font-size: 10px; }
 .post-author span { font-size: 8px; color: #8c7e75; }
 .post-author button { border: 0; background: none; letter-spacing: 1px; font-size: 11px; cursor: pointer; }
-.feed-post > p { font-family: 'DM Serif Display', serif; font-size: 16px; line-height: 1.25; margin: 15px 0 10px; }
+.feed-post > p { font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 16px; line-height: 1.4; margin: 15px 0 10px; }
 .post-image { width: 100%; height: 320px; object-fit: cover; border-radius: 2px; }
 .post-actions { display: flex; justify-content: space-between; padding-top: 11px; }
 .post-actions button { border: 0; background: none; color: #70645e; padding: 2px 0; font-size: 9px; font-weight: 700; cursor: pointer; }
@@ -79,7 +79,7 @@ h1 em, h2 em { color: var(--orange); font-weight: 400; }
 .note-bottom .pulse { width: 8px; height: 8px; border-radius: 50%; background: #4dc17b; box-shadow: 0 0 0 4px #dff5e7; }
 
 .ticker { background: var(--ink); color: white; overflow: hidden; padding: 17px 0; transform: rotate(-1.2deg) scale(1.02); }
-.ticker div { display: flex; align-items: center; justify-content: center; gap: 36px; white-space: nowrap; font-family: 'DM Serif Display', serif; font-size: 22px; }
+.ticker div { display: flex; align-items: center; justify-content: center; gap: 36px; white-space: nowrap; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 22px; }
 .ticker b { color: var(--orange); font-size: 15px; }
 
 .section-heading { display: grid; grid-template-columns: 1fr 3fr; margin-bottom: 72px; }
@@ -89,11 +89,11 @@ h1 em, h2 em { color: var(--orange); font-weight: 400; }
 .feature-layout { display: grid; grid-template-columns: 1.08fr .92fr; gap: 88px; align-items: center; }
 .feature-image-wrap { position: relative; }
 .feature-image-wrap img { width: 100%; height: 550px; object-fit: cover; filter: saturate(.75) sepia(.08); }
-.feature-image-wrap > span { position: absolute; right: -32px; bottom: -35px; width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; text-align: center; background: var(--orange); color: white; font-family: 'DM Serif Display', serif; font-style: italic; transform: rotate(-10deg); }
+.feature-image-wrap > span { position: absolute; right: -32px; bottom: -35px; width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; text-align: center; background: var(--orange); color: white; font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-style: italic; transform: rotate(-10deg); }
 .feature-list article { display: grid; grid-template-columns: 42px 1fr; gap: 18px; padding: 28px 0; border-top: 1px solid #cfc2b6; }
 .feature-list article:last-child { border-bottom: 1px solid #cfc2b6; }
 .feature-list article > span { font-size: 11px; color: var(--orange); font-weight: 700; padding-top: 5px; }
-.feature-list h3 { font-family: 'DM Serif Display', serif; font-size: 27px; font-weight: 400; margin: 0 0 8px; }
+.feature-list h3 { font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 27px; font-weight: 600; margin: 0 0 8px; }
 .feature-list p { color: #71645d; line-height: 1.65; font-size: 14px; margin: 0; max-width: 440px; }
 
 .values { background: var(--orange); color: white; overflow: hidden; }
@@ -102,8 +102,8 @@ h1 em, h2 em { color: var(--orange); font-weight: 400; }
 .values h2 em { color: #541804; }
 .values-copy > p:last-child { max-width: 560px; font-size: 16px; line-height: 1.7; margin: 32px 0 0; color: #ffe5d5; }
 .quote-card { background: #fffaf2; color: var(--ink); padding: 38px; transform: rotate(2deg); box-shadow: 18px 20px 0 #d93b08; }
-.quote-mark { color: var(--orange); font-family: 'DM Serif Display', serif; font-size: 72px; line-height: .6; }
-blockquote { font-family: 'DM Serif Display', serif; font-size: 30px; line-height: 1.25; margin: 28px 0 38px; }
+.quote-mark { color: var(--orange); font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 72px; line-height: .6; }
+blockquote { font-family: 'Be Vietnam Pro', system-ui, sans-serif; font-size: 30px; line-height: 1.4; margin: 28px 0 38px; }
 .quote-person { display: flex; align-items: center; gap: 12px; border-top: 1px solid #dfd3c7; padding-top: 20px; }
 .quote-person img { width: 42px; height: 42px; object-fit: cover; border-radius: 50%; }
 .quote-person div { display: flex; flex-direction: column; }
@@ -117,7 +117,7 @@ blockquote { font-family: 'DM Serif Display', serif; font-size: 30px; line-heigh
 .portrait-grid img { width: 100%; height: 100%; object-fit: cover; }
 .portrait-tall { grid-row: 1 / span 2; }
 .stat-tile { background: #f3dfc7; display: flex; flex-direction: column; justify-content: center; padding: 30px; }
-.stat-tile strong { font-family: 'DM Serif Display', serif; color: var(--orange); font-size: 68px; line-height: .9; font-weight: 400; }
+.stat-tile strong { font-family: 'Be Vietnam Pro', system-ui, sans-serif; color: var(--orange); font-size: 68px; line-height: .9; font-weight: 600; }
 .stat-tile span { text-transform: uppercase; letter-spacing: 1.7px; font-size: 9px; font-weight: 700; margin-top: 13px; line-height: 1.5; }
 
 .join { position: relative; background: #f2e1ca; min-height: 610px; display: grid; place-items: center; text-align: center; overflow: hidden; padding: 100px 24px; }
@@ -128,8 +128,10 @@ blockquote { font-family: 'DM Serif Display', serif; font-size: 30px; line-heigh
 .join input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 15px 18px; background: transparent; }
 .join button { border: 0; background: var(--orange); color: white; padding: 15px 22px; font-weight: 700; cursor: pointer; }
 .join button:hover { background: var(--orange-dark); }
+.join button:disabled, .join input:read-only { cursor: wait; opacity: .65; }
 .join small { color: #88776d; font-size: 10px; }
 .success-message { max-width: 525px; margin: 0 auto 20px; background: white; border-left: 4px solid var(--orange); padding: 20px; font-weight: 700; }
+.form-error { max-width: 525px; margin: 0 auto 14px; color: #a32d08; font-size: 13px; }
 .join-shape { position: absolute; border-radius: 50%; background: var(--orange); }
 .shape-left { width: 330px; height: 330px; left: -190px; top: 40px; }
 .shape-right { width: 440px; height: 440px; right: -270px; bottom: -160px; }

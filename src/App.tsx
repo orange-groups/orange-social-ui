@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import './App.css'
 
+const waitlistUrl = import.meta.env.VITE_WAITLIST_URL
+
 const people = [
   { name: 'Linh', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80' },
   { name: 'Minh', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80' },
@@ -22,12 +24,38 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [joined, setJoined] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [liked, setLiked] = useState(false)
 
-  const joinWaitlist = (event: FormEvent<HTMLFormElement>) => {
+  const joinWaitlist = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!email.trim()) return
+    const normalizedEmail = email.trim().toLowerCase()
+    if (!normalizedEmail || isSubmitting) return
+
+    if (!waitlistUrl) {
+      setSubmitError('Form đăng ký chưa được cấu hình. Vui lòng thử lại sau.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitError('')
+
+    const submission = fetch(waitlistUrl, {
+        method: 'POST',
+        keepalive: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ email: normalizedEmail }),
+      }).catch(() => undefined)
+
+    void submission
+    await new Promise((resolve) => window.setTimeout(resolve, 1000))
+
     setJoined(true)
+    setEmail('')
+    setIsSubmitting(false)
   }
 
   return (
@@ -119,7 +147,7 @@ function App() {
         </div>
         <div className="feature-layout">
           <div className="feature-image-wrap">
-            <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659e?auto=format&fit=crop&w=1200&q=85" alt="Nhóm bạn đang vui vẻ trò chuyện cùng nhau" />
+            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&q=85" alt="Nhóm bạn đang vui vẻ trò chuyện cùng nhau" />
             <span>made for<br />real life</span>
           </div>
           <div className="feature-list">
@@ -184,10 +212,13 @@ function App() {
           ) : (
             <form onSubmit={joinWaitlist}>
               <label className="sr-only" htmlFor="email">Email của bạn</label>
-              <input id="email" type="email" required placeholder="ban@email.com" value={email} onChange={(event) => setEmail(event.target.value)} />
-              <button type="submit">Giữ chỗ <span aria-hidden="true">→</span></button>
+              <input id="email" name="email" type="email" inputMode="email" autoComplete="email" required placeholder="ban@email.com" value={email} readOnly={isSubmitting} onChange={(event) => setEmail(event.target.value)} />
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Đang gửi…' : 'Giữ chỗ'} {!isSubmitting && <span aria-hidden="true">→</span>}
+              </button>
             </form>
           )}
+          {submitError && <p className="form-error" role="alert">{submitError}</p>}
           <small>Không spam. Chỉ một lời mời thật ngon.</small>
         </div>
       </section>
