@@ -1,0 +1,31 @@
+{
+  "brand": "Orange",
+  "wordmark": "orange",
+  "brandHome": "Orange — Trang chủ",
+  "backHome": "Về trang chủ",
+  "copyright": "© {{year}} Orange",
+  "footer": "Được tạo nên cho những kết nối thật.",
+  "preferences": "Tùy chọn hiển thị",
+  "language": "Ngôn ngữ",
+  "languages": {
+    "vi": "VI",
+    "en": "EN"
+  },
+  "light": "Chuyển sang giao diện sáng",
+  "dark": "Chuyển sang giao diện tối",
+  "previewLabel": "XEM TRƯỚC GIAO DIỆN",
+  "previewNotice": "Bạn đang thử luồng giao diện. Thao tác này không đăng nhập, tạo tài khoản hay gửi email.",
+  "previewTitle": "Luồng giao diện đã sẵn sàng",
+  "previewDescription": "Bạn có thể chuyển trang, đổi ngôn ngữ và giao diện để kiểm tra trải nghiệm.",
+  "previewLogin": "Đã hoàn tất form đăng nhập ở chế độ xem trước.",
+  "previewRegister": "Đã hoàn tất form đăng ký ở chế độ xem trước.",
+  "previewRecovery": "Đã hoàn tất form khôi phục ở chế độ xem trước.",
+  "tryLogin": "Thử đăng nhập",
+  "tryRegister": "Thử đăng ký",
+  "tryRecovery": "Thử quên mật khẩu",
+  "notFoundTitle": "Không tìm thấy trang",
+  "notFoundDescription": "Đường dẫn này chưa có trong Orange. Hãy quay về trang chủ hoặc mở trang đăng nhập.",
+  "pageTitle": "{{title}} — Orange",
+  "homeTitle": "Orange — Mạng xã hội cho người thật",
+  "homeDescription": "Orange — mạng xã hội cho những kết nối thật, những cuộc trò chuyện có ý nghĩa và một bảng tin biết dừng đúng lúc."
+}

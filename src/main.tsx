@@ -7,11 +7,14 @@ import '@fontsource/be-vietnam-pro/700.css'
 import '@fontsource/be-vietnam-pro/400-italic.css'
 import '@fontsource/be-vietnam-pro/600-italic.css'
 import '@fontsource/be-vietnam-pro/700-italic.css'
+import './i18n'
 import './index.css'
-import App from './App.tsx'
+import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from './app/theme/ThemeProvider'
+import { AppRouter } from './app/router'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ThemeProvider><BrowserRouter><AppRouter /></BrowserRouter></ThemeProvider>
   </StrictMode>,
 )

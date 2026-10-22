@@ -1,0 +1,31 @@
+{
+  "brand": "Orange",
+  "wordmark": "orange",
+  "brandHome": "Orange — Home",
+  "backHome": "Back to home",
+  "copyright": "© {{year}} Orange",
+  "footer": "Made for real connections.",
+  "preferences": "Display preferences",
+  "language": "Language",
+  "languages": {
+    "vi": "VI",
+    "en": "EN"
+  },
+  "light": "Switch to light theme",
+  "dark": "Switch to dark theme",
+  "previewLabel": "UI PREVIEW",
+  "previewNotice": "You are previewing the interface. This does not sign you in, create an account, or send email.",
+  "previewTitle": "Your UI flow is ready",
+  "previewDescription": "Explore the pages, languages, and themes to review the experience.",
+  "previewLogin": "The sign-in form is complete in preview mode.",
+  "previewRegister": "The registration form is complete in preview mode.",
+  "previewRecovery": "The recovery form is complete in preview mode.",
+  "tryLogin": "Try sign in",
+  "tryRegister": "Try sign up",
+  "tryRecovery": "Try password recovery",
+  "notFoundTitle": "Page not found",
+  "notFoundDescription": "This page is not available on Orange. Return home or open the sign-in page.",
+  "pageTitle": "{{title}} — Orange",
+  "homeTitle": "Orange — A social network for real people",
+  "homeDescription": "Orange brings you real connections, meaningful conversations, and a feed that knows when to stop."
+}
