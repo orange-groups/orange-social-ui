@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { ApiError } from '../../../lib/api-client'
+import { registerUser } from '../api/auth.api'
 import type { AuthErrorKey } from '../auth.types'
 
 type AccountMode = 'register' | 'recovery'
@@ -12,12 +14,20 @@ export function useAccountForm(mode: AccountMode) {
   const navigate = useNavigate()
   const [values, setValues] = useState<Values>({ name: '', email: '', password: '', confirmPassword: '' })
   const [errors, setErrors] = useState<Partial<Record<Field, AuthErrorKey>>>({})
+  const [serverError, setServerError] = useState<AuthErrorKey>()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   function changeField(field: Field, value: string) {
     setValues(previous => ({ ...previous, [field]: value }))
     setErrors(previous => ({ ...previous, [field]: undefined }))
+    setServerError(undefined)
   }
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (isSubmitting) return
+
+    const formElement = event.currentTarget
     const next: Partial<Record<Field, AuthErrorKey>> = {}
     if (mode === 'register' && !values.name.trim()) next.name = 'errors.nameRequired'
     if (!values.email.trim()) next.email = 'errors.emailRequired'
@@ -28,12 +38,37 @@ export function useAccountForm(mode: AccountMode) {
       if (!values.confirmPassword || values.confirmPassword !== values.password) next.confirmPassword = 'errors.passwordMismatch'
     }
     setErrors(next)
+    setServerError(undefined)
     const firstInvalid = (['name', 'email', 'password', 'confirmPassword'] as const).find(field => next[field])
     if (firstInvalid) {
-      event.currentTarget.querySelector<HTMLInputElement>(`[name="${firstInvalid}"]`)?.focus()
+      formElement.querySelector<HTMLInputElement>(`[name="${firstInvalid}"]`)?.focus()
       return
     }
-    navigate(mode === 'register' ? '/verify-email' : '/check-email')
+
+    if (mode === 'recovery') {
+      navigate('/check-email')
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      await registerUser({
+        fullName: values.name.trim(),
+        email: values.email.trim(),
+        password: values.password,
+      })
+      navigate('/verify-email')
+    } catch (error: unknown) {
+      if (error instanceof ApiError && error.status === 409) {
+        setErrors(previous => ({ ...previous, email: 'errors.emailExists' }))
+        formElement.querySelector<HTMLInputElement>('[name="email"]')?.focus()
+      } else {
+        setServerError('errors.registerFailed')
+      }
+    } finally {
+      setIsSubmitting(false)
+    }
   }
-  return { values, errors, changeField, handleSubmit }
+
+  return { values, errors, serverError, isSubmitting, changeField, handleSubmit }
 }
