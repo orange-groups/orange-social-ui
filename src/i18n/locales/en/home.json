@@ -52,7 +52,7 @@
   "contacts": "Online now",
   "mutual": "{{count}} mutual friends",
   "note": "UI preview · Changes last for this session only.",
-  "logout": "Back to sign in",
+  "logout": "Sign out",
   "empty": "No posts here yet.",
   "emptyHint": "Try another search or save a post you love.",
   "now": "Just now",

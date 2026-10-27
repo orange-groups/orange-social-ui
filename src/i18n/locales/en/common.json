@@ -27,5 +27,6 @@
   "notFoundDescription": "This page is not available on Orange. Return home or open the sign-in page.",
   "pageTitle": "{{title}} — Orange",
   "homeTitle": "Orange — A social network for real people",
-  "homeDescription": "Orange brings you real connections, meaningful conversations, and a feed that knows when to stop."
+  "homeDescription": "Orange brings you real connections, meaningful conversations, and a feed that knows when to stop.",
+  "checkingSession": "Checking your session…"
 }

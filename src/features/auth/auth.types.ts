@@ -22,3 +22,11 @@ export interface RegisterResponse {
   accessToken: string
   user: AuthUser
 }
+
+export interface LoginRequest {
+  email: string
+  password: string
+}
+
+/** Same shape as RegisterResponse; also returned by POST /auth/refresh. */
+export type LoginResponse = RegisterResponse

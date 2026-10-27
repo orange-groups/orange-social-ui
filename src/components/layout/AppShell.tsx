@@ -6,6 +6,7 @@ import { AppearanceControls } from '../preferences/AppearanceControls'
 import { FeedIcon } from '../../features/feed/components/FeedIcon'
 import { AppSidebar } from './AppSidebar'
 import { AppRightRail } from './AppRightRail'
+import { useSession } from '../../features/auth'
 import '../../features/feed/feed.css'
 
 export function AppShell() {
@@ -13,6 +14,7 @@ export function AppShell() {
   const navigate = useNavigate()
   const location = useLocation()
   const hasRightRail = location.pathname === '/home'
+  const initial = useSession().user?.fullName.charAt(0).toUpperCase()
   const [search, setSearch] = useState(() => new URLSearchParams(location.search).get('q') ?? '')
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -20,7 +22,7 @@ export function AppShell() {
     navigate(query ? `/home?q=${encodeURIComponent(query)}` : '/home')
   }
   return <div className="orange-feed">
-    <header className="feed-header"><Link className="feed-brand" to="/home" aria-label="Orange Social">orange<span>.</span></Link><form className="feed-search" role="search" onSubmit={submitSearch}><FeedIcon name="search" /><input type="search" placeholder={t('search')} aria-label={t('search')} value={search} onChange={event => setSearch(event.target.value)} /></form><div className="feed-header-right"><AppearanceControls /><Link className="feed-icon-button" to="/notifications" aria-label={t('notifications')}><FeedIcon name="comment" /></Link><Link className="feed-avatar feed-self feed-avatar-link" to="/profile" aria-label={t('profile')}>Q</Link></div></header>
+    <header className="feed-header"><Link className="feed-brand" to="/home" aria-label="Orange Social">orange<span>.</span></Link><form className="feed-search" role="search" onSubmit={submitSearch}><FeedIcon name="search" /><input type="search" placeholder={t('search')} aria-label={t('search')} value={search} onChange={event => setSearch(event.target.value)} /></form><div className="feed-header-right"><AppearanceControls /><Link className="feed-icon-button" to="/notifications" aria-label={t('notifications')}><FeedIcon name="comment" /></Link><Link className="feed-avatar feed-self feed-avatar-link" to="/profile" aria-label={t('profile')}>{initial}</Link></div></header>
     <div className={`feed-layout${hasRightRail ? '' : ' feed-layout--two-column'}`}><AppSidebar /><main className="feed-main"><Outlet /></main>{hasRightRail && <AppRightRail />}</div>
   </div>
 }
