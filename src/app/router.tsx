@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import App from '../App'
 import { HomePage } from '../features/feed/pages/HomePage'
-import { LoginPage, RegisterPage, ForgotPasswordPage, PreviewPage, NotFoundPage } from '../features/auth'
+import { LoginPage, RegisterPage, ForgotPasswordPage, PreviewPage, NotFoundPage, GuestRoute, ProtectedRoute, useRestoreSession } from '../features/auth'
 import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage'
 import { CheckEmailPage } from '../features/auth/pages/CheckEmailPage'
 import { ResetPasswordPage } from '../features/auth/pages/ResetPasswordPage'
@@ -34,17 +34,22 @@ function RouteEffects() {
 }
 
 export function AppRouter() {
+  useRestoreSession()
   return (
     <><RouteEffects /><FeedPostsProvider><Routes>
       <Route path="/" element={<App />} />
-      <Route element={<AppShell />}>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/saved" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/friends" element={<FriendsPage />} />
-        <Route path="/notifications" element={<NotificationsPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppShell />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/saved" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/friends" element={<FriendsPage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
+        </Route>
       </Route>
-      <Route path="/login" element={<LoginPage />} />
+      <Route element={<GuestRoute />}>
+        <Route path="/login" element={<LoginPage />} />
+      </Route>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />

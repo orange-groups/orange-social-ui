@@ -30,7 +30,10 @@
 .feed-nav button>span { margin-left:auto; font-size:10px; background:var(--color-surface); border-radius:5px; padding:4px 7px; }
 .orange-feed h2 { font-size:12px; margin:0; font-weight:600; }
 .feed-side-bottom { padding:0 16px 20px; color:var(--color-muted); font-size:10px; line-height:1.8; }
-.feed-side-bottom a { display:flex; align-items:center; gap:8px; min-height:44px; text-decoration:none; margin:16px 0; }
+.feed-side-bottom a,.feed-side-bottom .feed-logout { display:flex; align-items:center; gap:8px; min-height:44px; text-decoration:none; margin:16px 0; }
+.feed-side-bottom .feed-logout { padding:0; border:0; background:none; color:inherit; font:inherit; cursor:pointer; }
+.feed-side-bottom .feed-logout:hover { color:var(--color-action); }
+.feed-side-bottom .feed-logout:disabled { opacity:.6; cursor:wait; }
 .feed-main { min-width:0; }
 .feed-heading { margin:0 0 27px; }
 .feed-heading>p { letter-spacing:2px; font-size:9px; font-weight:600; color:var(--color-action); margin:0 0 10px; }
