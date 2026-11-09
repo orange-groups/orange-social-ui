@@ -1,4 +1,6 @@
 {
+  "sessionUnavailable": "Unable to check your session right now. Please try again.",
+  "retrySession": "Try again",
   "brand": "Orange",
   "wordmark": "orange",
   "brandHome": "Orange — Home",

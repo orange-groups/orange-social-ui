@@ -28,7 +28,6 @@ export function AuthLayout({ title, description, eyebrow, children }: AuthLayout
           <div className="auth-form-heading"><span className="auth-welcome">{eyebrow ?? auth('welcome')}</span><h1 id="auth-title">{title}<span>.</span></h1><p>{description}</p></div>
           {children}
           <p className="auth-private"><AuthIcon name="lock" />{auth('privacy')}</p>
-          <p className="auth-preview-note">{t('previewNotice')}</p>
         </div>
         <footer className="auth-panel-footer"><span>{t('copyright', { year: COPYRIGHT_YEAR })}</span><span>{t('footer')}</span></footer>
       </section>

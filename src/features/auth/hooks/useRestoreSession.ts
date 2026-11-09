@@ -11,7 +11,7 @@ import { getSession } from '../session.store'
 export function useRestoreSession() {
   useEffect(() => {
     setRefreshHandler(refreshSession)
-    if (getSession().status === 'checking') void refreshSession()
+    if (getSession().status === 'checking') void refreshSession().catch(() => undefined)
     return () => setRefreshHandler(null)
   }, [])
 }

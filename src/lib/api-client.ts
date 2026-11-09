@@ -36,7 +36,7 @@ export function setRefreshHandler(handler: RefreshHandler | null): void {
 }
 
 // A 401 from these means wrong credentials or a dead session, not an expired access token
-const SESSION_PATHS = ['/auth/login', '/auth/refresh', '/auth/logout', '/auth/regis']
+const SESSION_PATHS = ['/auth/login', '/auth/refresh', '/auth/logout', '/auth/regis', '/auth/forgot-password', '/auth/reset-password']
 
 async function send(path: string, init: RequestInit): Promise<Response> {
   const headers = new Headers(init.headers)

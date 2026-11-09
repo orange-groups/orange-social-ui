@@ -1,6 +1,6 @@
-import { apiRequest } from '../../../lib/api-client'
+import { ApiError, apiRequest } from '../../../lib/api-client'
 import type { AuthUser, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../auth.types'
-import { clearSession, getSession, setSession } from '../session.store'
+import { clearSession, getSession, markSessionUnavailable, setSession } from '../session.store'
 
 export function getAuthenticatedUser(): AuthUser | null {
   return getSession().user
@@ -26,6 +26,15 @@ export async function loginUser(payload: LoginRequest): Promise<LoginResponse> {
 
 let refreshInFlight: Promise<string | null> | null = null
 
+export function requestPasswordReset(email: string): Promise<{ message: string }> {
+  return apiRequest('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) })
+}
+
+export async function resetPassword(token: string, newPassword: string): Promise<void> {
+  await apiRequest('/auth/reset-password', { method: 'POST', body: JSON.stringify({ token, newPassword }) })
+  clearSession()
+}
+
 /**
  * Gets a new access token from the httpOnly refresh cookie (after F5, or when the
  * 15-minute access token expires). Parallel callers share one request because the
@@ -37,9 +46,13 @@ export function refreshSession(): Promise<string | null> {
       setSession(response)
       return response.accessToken
     })
-    .catch(() => {
-      clearSession()
-      return null
+    .catch((error: unknown) => {
+      if (error instanceof ApiError && error.status === 401) {
+        clearSession()
+        return null
+      }
+      markSessionUnavailable()
+      throw error
     })
     .finally(() => { refreshInFlight = null })
   return refreshInFlight

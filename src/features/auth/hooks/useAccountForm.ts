@@ -3,7 +3,7 @@ import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ApiError } from '../../../lib/api-client'
-import { registerUser } from '../api/auth.api'
+import { registerUser, requestPasswordReset } from '../api/auth.api'
 import type { AuthErrorKey } from '../auth.types'
 
 type AccountMode = 'register' | 'recovery'
@@ -45,25 +45,25 @@ export function useAccountForm(mode: AccountMode) {
       return
     }
 
-    if (mode === 'recovery') {
-      navigate('/check-email')
-      return
-    }
-
     setIsSubmitting(true)
     try {
+      if (mode === 'recovery') {
+        await requestPasswordReset(values.email.trim())
+        navigate('/check-email')
+        return
+      }
       await registerUser({
         fullName: values.name.trim(),
         email: values.email.trim(),
         password: values.password,
       })
-      navigate('/verify-email')
+      navigate('/home')
     } catch (error: unknown) {
       if (error instanceof ApiError && error.status === 409) {
         setErrors(previous => ({ ...previous, email: 'errors.emailExists' }))
         formElement.querySelector<HTMLInputElement>('[name="email"]')?.focus()
       } else {
-        setServerError('errors.registerFailed')
+        setServerError(mode === 'recovery' ? 'errors.recoveryFailed' : 'errors.registerFailed')
       }
     } finally {
       setIsSubmitting(false)

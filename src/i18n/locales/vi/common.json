@@ -1,4 +1,6 @@
 {
+  "sessionUnavailable": "Chưa thể kiểm tra phiên đăng nhập. Vui lòng thử lại.",
+  "retrySession": "Thử lại",
   "brand": "Orange",
   "wordmark": "orange",
   "brandHome": "Orange — Trang chủ",

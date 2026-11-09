@@ -6,7 +6,7 @@ import type { AuthUser } from './auth.types'
  * - `checking`: page just loaded (or F5), asking the backend if the refresh cookie is still valid
  * - `authenticated` / `guest`: the answer
  */
-export type SessionStatus = 'checking' | 'authenticated' | 'guest'
+export type SessionStatus = 'checking' | 'authenticated' | 'guest' | 'unavailable'
 
 type SessionState = { status: SessionStatus; user: AuthUser | null }
 
@@ -27,6 +27,10 @@ export function setSession(session: { accessToken: string; user: AuthUser }): vo
 export function clearSession(): void {
   clearAccessToken()
   update({ status: 'guest', user: null })
+}
+
+export function markSessionUnavailable(): void {
+  if (state.status !== 'authenticated') update({ ...state, status: 'unavailable' })
 }
 
 export function getSession(): SessionState {
