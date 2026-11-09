@@ -15,12 +15,16 @@ export function clearAccessToken(): void {
 export class ApiError extends Error {
   readonly status: number
   readonly data?: unknown
+  readonly code?: string
+  readonly details?: unknown
 
-  constructor(message: string, status: number, data?: unknown) {
+  constructor(message: string, status: number, data?: unknown, code?: string, details?: unknown) {
     super(message)
     this.name = 'ApiError'
     this.status = status
     this.data = data
+    this.code = code
+    this.details = details
   }
 }
 
@@ -70,15 +74,21 @@ export async function apiRequest<T>(path: string, init: RequestInit = {}): Promi
   const payload: unknown = isJson ? await response.json() : undefined
 
   if (!response.ok) {
-    const errorMessage =
-      typeof payload === 'object' &&
-      payload !== null &&
-      'message' in payload &&
-      typeof (payload as { message: unknown }).message === 'string'
-        ? (payload as { message: string }).message
-        : `HTTP error ${response.status}`
-    throw new ApiError(errorMessage, response.status, payload)
+    if (isRecord(payload) && payload.success === false && isRecord(payload.error)) {
+      const error = payload.error
+      throw new ApiError(typeof error.message === 'string' ? error.message : `HTTP error ${response.status}`,
+        response.status, payload, typeof error.code === 'string' ? error.code : undefined, error.details)
+    }
+    throw new ApiError(`HTTP error ${response.status}`, response.status, payload)
   }
 
-  return payload as T
+  if (response.status === 204 || response.status === 205 || init.method?.toUpperCase() === 'HEAD') return undefined as T
+  if (!isRecord(payload) || payload.success !== true || !('data' in payload)) {
+    throw new ApiError('Invalid API response format', response.status, payload, 'INVALID_RESPONSE')
+  }
+  return payload.data as T
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null
 }
