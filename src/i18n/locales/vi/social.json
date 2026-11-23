@@ -1,4 +1,5 @@
 {
+  "personalProfile": { "fullName": "Họ và tên", "username": "Tên người dùng", "bio": "Giới thiệu", "notProvided": "Chưa cập nhật", "loading": "Đang tải hồ sơ…", "error": "Không tải được thông tin cá nhân.", "retry": "Thử lại" },
   "preview": "Bản xem trước · dữ liệu tạm", "navigation": "Điều hướng", "eyebrow": "KHÔNG GIAN CỦA BẠN", "me": "Trần Minh Quang",
   "nav": { "feed": "Bảng tin", "profile": "Trang cá nhân", "friends": "Bạn bè", "notifications": "Thông báo" },
   "friends": { "title": "Kết nối bạn bè", "description": "Xem lời mời, bạn bè và người có thể bạn quen.", "requests": "Lời mời nhận được", "sent": "Lời mời đã gửi", "yourFriends": "Bạn bè của bạn", "suggestions": "Gợi ý kết bạn · VIP", "mutual": "{{count}} bạn chung", "following": "Đang theo dõi trong lúc chờ", "accept": "Chấp nhận", "reject": "Từ chối", "cancel": "Huỷ lời mời", "unfriend": "Huỷ kết bạn", "add": "Kết bạn", "empty": "Chưa có ai ở mục này." },

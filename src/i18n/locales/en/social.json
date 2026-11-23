@@ -1,4 +1,5 @@
 {
+  "personalProfile": { "fullName": "Full name", "username": "Username", "bio": "Bio", "notProvided": "Not provided", "loading": "Loading your profile…", "error": "Could not load your profile.", "retry": "Try again" },
   "preview": "Preview · temporary data", "navigation": "Navigation", "eyebrow": "YOUR SPACE", "me": "Trần Minh Quang",
   "nav": { "feed": "Feed", "profile": "Profile", "friends": "Friends", "notifications": "Notifications" },
   "friends": { "title": "Your connections", "description": "See requests, friends, and people you may know.", "requests": "Incoming requests", "sent": "Sent requests", "yourFriends": "Your friends", "suggestions": "Friend suggestions · VIP", "mutual": "{{count}} mutual friends", "following": "Following while waiting", "accept": "Accept", "reject": "Decline", "cancel": "Cancel request", "unfriend": "Unfriend", "add": "Add friend", "empty": "No one here yet." },
