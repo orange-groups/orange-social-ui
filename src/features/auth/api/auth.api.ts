@@ -35,6 +35,14 @@ export async function resetPassword(token: string, newPassword: string): Promise
   clearSession()
 }
 
+export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  await apiRequest<{ message: string }>('/auth/change-password', {
+    method: 'POST',
+    body: JSON.stringify({ currentPassword, newPassword }),
+  })
+  clearSession()
+}
+
 /**
  * Gets a new access token from the httpOnly refresh cookie (after F5, or when the
  * 15-minute access token expires). Parallel callers share one request because the
