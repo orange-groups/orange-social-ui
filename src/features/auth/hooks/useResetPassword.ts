@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { ApiError } from '../../../lib/api-client'
 import { resetPassword } from '../api/auth.api'
 import type { AuthErrorKey } from '../auth.types'
+import { isValidNewPassword } from '../password-policy'
 
 export function useResetPassword() {
   const [params] = useSearchParams()
@@ -18,8 +19,8 @@ export function useResetPassword() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (isSubmitting || !hasValidToken) return
-    if (password.length < 12 || new TextEncoder().encode(password).length > 72) {
-      setError('errors.resetPasswordRule')
+    if (!isValidNewPassword(password)) {
+      setError('errors.passwordPolicy')
       return
     }
     if (password !== confirm) {

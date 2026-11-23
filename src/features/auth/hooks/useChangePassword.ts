@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ApiError } from '../../../lib/api-client'
 import { changePassword } from '../api/auth.api'
+import { isValidNewPassword } from '../password-policy'
 
 export function useChangePassword() {
   const navigate = useNavigate()
@@ -15,7 +16,7 @@ export function useChangePassword() {
     const data = new FormData(event.currentTarget)
     const currentPassword = String(data.get('currentPassword') ?? '')
     const newPassword = String(data.get('newPassword') ?? '')
-    if ([...newPassword].length < 12 || new TextEncoder().encode(newPassword).length > 72) {
+    if (!isValidNewPassword(newPassword)) {
       setError('passwordRule')
       return
     }
