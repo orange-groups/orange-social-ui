@@ -1,4 +1,5 @@
 {
+  "profileEditor": { "edit": "Sửa thông tin cá nhân", "cancel": "Hủy", "saving": "Đang lưu…", "success": "Đã cập nhật thông tin cá nhân.", "error": "Không lưu được thông tin cá nhân. Kiểm tra dữ liệu rồi thử lại." },
   "personalProfile": { "fullName": "Họ và tên", "username": "Tên người dùng", "bio": "Giới thiệu", "notProvided": "Chưa cập nhật", "loading": "Đang tải hồ sơ…", "error": "Không tải được thông tin cá nhân.", "retry": "Thử lại" },
   "preview": "Bản xem trước · dữ liệu tạm", "navigation": "Điều hướng", "eyebrow": "KHÔNG GIAN CỦA BẠN", "me": "Trần Minh Quang",
   "nav": { "feed": "Bảng tin", "profile": "Trang cá nhân", "friends": "Bạn bè", "notifications": "Thông báo" },

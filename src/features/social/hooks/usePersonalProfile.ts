@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getPersonalProfile } from '../api/personal-profile.api'
-import type { PersonalProfile } from '../api/personal-profile.api'
+import { updateSessionFullName } from '../../auth'
+import { getPersonalProfile, updatePersonalProfile } from '../api/personal-profile.api'
+import type { PersonalProfile, PersonalProfilePatch } from '../api/personal-profile.api'
 
 export type PersonalProfileState =
   | { status: 'loading' }
@@ -25,5 +26,11 @@ export function usePersonalProfile() {
     setAttempt(current => current + 1)
   }
 
-  return { state, retry }
+  async function save(changes: PersonalProfilePatch) {
+    const profile = await updatePersonalProfile(changes)
+    setState({ status: 'loaded', profile })
+    if (changes.fullName !== undefined) updateSessionFullName(profile.id, profile.fullName)
+  }
+
+  return { state, retry, save }
 }
