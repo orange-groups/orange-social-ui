@@ -1,4 +1,5 @@
 {
+  "notificationInbox": { "unreadLabel": "Notifications: {{count}} unread", "loading": "Loading notifications…", "loadError": "Could not load notifications.", "updateError": "Could not mark notifications as read. Try again.", "empty": "You have no notifications yet.", "more": "Load more", "friendRequest": "{{name}} sent you a friend request.", "friendAccepted": "{{name}} accepted your friend request.", "reaction": "{{name}} reacted to your post.", "comment": "{{name}} commented on your post." },
   "profileEditor": { "edit": "Edit personal details", "cancel": "Cancel", "saving": "Saving…", "success": "Personal details updated.", "error": "Could not save your personal details. Check the fields and try again." },
   "personalProfile": { "fullName": "Full name", "username": "Username", "bio": "Bio", "notProvided": "Not provided", "loading": "Loading your profile…", "error": "Could not load your profile.", "retry": "Try again" },
   "preview": "Preview · temporary data", "navigation": "Navigation", "eyebrow": "YOUR SPACE", "me": "Trần Minh Quang",
