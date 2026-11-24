@@ -72,7 +72,6 @@
 .feed-edit-form>div { display:flex; justify-content:flex-end; gap:8px; }
 .feed-delete-confirm { display:flex; align-items:center; gap:8px; padding:12px 20px; background:var(--color-notice); flex-wrap:wrap; }
 .feed-delete-confirm span { margin-right:auto; }
-.feed-post-actions-three { grid-template-columns:repeat(3,1fr); }
 .feed-comment-item { border-left:2px solid var(--color-brand); padding:10px 14px; margin-bottom:10px; background:var(--color-background); border-radius:8px; }
 .feed-comment-item p { margin:5px 0; padding:0; }
 .feed-comment-item button,.feed-reply-to button { border:0; background:transparent; color:var(--color-action); min-height:30px; }
@@ -85,7 +84,7 @@
 .orange-feed .feed-primary:not(:disabled):hover { background:var(--color-action-hover); }
 .feed-list-title { margin:28px 0 16px; }
 .feed-line { height:1px; background:var(--color-border); flex:1; }
-.feed-post-card { margin-bottom:22px; }
+.feed-post-card { margin-bottom:22px; scroll-margin-top:100px; }
 .feed-post-card header { padding:20px 20px 0; }
 .feed-icon-button { display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:9px; background:transparent; flex-shrink:0; }
 .feed-save { margin-left:auto; }
@@ -94,8 +93,17 @@
 .feed-post-image { width:100%; max-height:400px; aspect-ratio:1.65; object-fit:cover; }
 .feed-post-stats { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; font-size:10px; color:var(--color-muted); }
 .feed-heart-dot { display:inline-grid; place-items:center; width:20px; height:20px; background:var(--color-brand-tint); color:var(--color-action); border-radius:50%; margin-right:5px; }
-.feed-post-actions { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--color-divider); margin:0 20px; padding:6px 0; gap:8px; }
+.feed-post-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--color-divider); margin:0 20px; padding:6px 0; gap:4px; }
 .feed-post-actions button { display:flex; justify-content:center; align-items:center; gap:8px; min-height:44px; border:0; background:transparent; border-radius:8px; font-size:11px; }
+.feed-post-actions button svg { flex-shrink:0; }
+.feed-post-actions button:not(:disabled):hover,.feed-post-actions button[data-reacted=true] { color:var(--color-action); background:var(--color-brand-tint); }
+.feed-post-actions button:disabled { color:var(--color-muted); cursor:not-allowed; }
+.feed-reaction-picker { position:relative; }
+.feed-reaction-picker > button { width:100%; }
+.feed-reaction-options:not([hidden]) { display:flex; gap:4px; position:absolute; z-index:2; bottom:calc(100% + 4px); left:0; width:max-content; padding:4px; border:1px solid var(--color-card-border); border-radius:10px; background:var(--color-surface); box-shadow:0 4px 16px var(--color-soft-shadow); }
+.feed-reaction-options button { padding:0 10px; }
+.feed-share-feedback { display:grid; gap:4px; margin:0 20px 12px; color:var(--color-muted); font-size:11px; }
+.feed-share-feedback input { width:100%; padding:8px; border:1px solid var(--color-border); border-radius:8px; background:var(--color-background); color:var(--color-text); }
 .feed-comments { padding:10px 20px 20px; }
 .feed-comments p { padding:12px; border-radius:10px; background:var(--color-background); line-height:1.7; overflow-wrap:anywhere; }
 .feed-comments form { display:flex; gap:8px; }

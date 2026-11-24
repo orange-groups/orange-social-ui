@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { usePageTitle } from '../../../hooks/usePageTitle'
@@ -11,15 +11,24 @@ import '../feed.css'
 
 export function HomePage() {
   const { t } = useTranslation('home')
-  usePageTitle(t('title'))
   const { posts, publish, update } = useFeedPosts()
   const location = useLocation()
   const saved = location.pathname === '/saved'
+  const pageTitle = t(saved ? 'saved' : 'title')
+  usePageTitle(pageTitle)
   const search = new URLSearchParams(location.search).get('q') ?? ''
   const [notice, setNotice] = useState('')
   const visible = posts.filter(post => !post.deleted && (!saved || post.saved) && `${post.author} ${post.contentKey ? t(post.contentKey) : post.text}`.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+
+  useEffect(() => {
+    // A shared link may open before the protected feed mounts.
+    if (/^#feed-post-\d+$/.test(location.hash)) {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView()
+    }
+  }, [location.hash])
+
   return <>
-    <div className="feed-heading"><p>{t('eyebrow')}</p><h1>{saved ? t('saved') : t('hello')}</h1><span>{t('subtitle')}</span></div>
+    <h1 className="sr-only">{pageTitle}</h1>
     {!saved && <><section className="feed-stories" aria-label={t('stories')}><div className="feed-section-title"><h2>{t('stories')}</h2></div><div className="feed-story-grid"><div className="feed-story-create"><span className="feed-story-plus"><FeedIcon name="plus" /></span><strong>{t('create')}</strong></div>{members.slice(0, 3).map(person => <div className="feed-story" key={person.name}><img className="feed-story-background" src={photoUrl(person.image, 400)} alt="" /><img className="feed-story-avatar" src={photoUrl(person.image)} alt="" /><strong>{person.name}</strong></div>)}</div></section><PostComposer onPublish={post => { publish(post); setNotice(t('posted')) }} /></>}
     <div className="feed-section-title feed-list-title"><h2>{t(saved ? 'saved' : 'forYou')}</h2><span className="feed-line" /></div>
     {visible.length === 0 && <div className="feed-card feed-empty"><FeedIcon name="search" /><h2>{t('empty')}</h2><p>{t('emptyHint')}</p></div>}
