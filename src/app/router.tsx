@@ -7,8 +7,10 @@ import { VerifyEmailPage } from '../features/auth/pages/VerifyEmailPage'
 import { CheckEmailPage } from '../features/auth/pages/CheckEmailPage'
 import { ResetPasswordPage } from '../features/auth/pages/ResetPasswordPage'
 import { ProfilePage } from '../features/social/pages/ProfilePage'
+import { PublicProfilePage } from '../features/social/pages/PublicProfilePage'
 import { FriendsPage } from '../features/social/pages/FriendsPage'
 import { NotificationsPage } from '../features/social/pages/NotificationsPage'
+import { UserSearchPage } from '../features/users'
 import { FeedPostsProvider } from '../features/feed/FeedPostsContext'
 import { AppShell } from '../components/layout/AppShell'
 
@@ -42,7 +44,9 @@ export function AppRouter() {
         <Route element={<AppShell />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/saved" element={<HomePage />} />
+          <Route path="/search" element={<UserSearchPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/:userId" element={<PublicProfilePage />} />
           <Route path="/friends" element={<FriendsPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
         </Route>

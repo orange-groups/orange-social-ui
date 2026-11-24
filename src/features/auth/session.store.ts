@@ -24,6 +24,11 @@ export function setSession(session: { accessToken: string; user: AuthUser }): vo
   update({ status: 'authenticated', user: session.user })
 }
 
+export function updateSessionAvatar(userId: string, avatarUrl: string): void {
+  if (state.status !== 'authenticated' || state.user?.id !== userId) return
+  update({ ...state, user: { ...state.user, avatarUrl } })
+}
+
 export function updateSessionFullName(userId: string, fullName: string): void {
   if (state.status !== 'authenticated' || state.user?.id !== userId) return
   update({ ...state, user: { ...state.user, fullName } })

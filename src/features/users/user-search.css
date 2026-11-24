@@ -1,0 +1,10 @@
+.user-search-form { position:relative; }
+.user-search-form button { display:grid; place-items:center; border:0; background:transparent; color:inherit; min-width:36px; min-height:44px; padding:0; }
+.user-search-error { position:absolute; top:100%; left:0; margin:4px 0 0; padding:8px 12px; border:1px solid var(--color-border); border-radius:8px; background:var(--color-surface); color:var(--color-text); }
+.user-search-feedback { padding:20px; }
+.user-search-results { list-style:none; margin:0 0 16px; padding:0; }
+.user-search-results li + li { border-top:1px solid var(--color-divider); }
+.user-search-result { padding:14px 16px; color:var(--color-text); text-decoration:none; overflow-wrap:anywhere; }
+.user-search-result:hover { background:var(--color-background); }
+.user-search-result:focus-visible { outline:2px solid var(--color-action); outline-offset:-2px; }
+.user-search-relationship { margin-left:auto; color:var(--color-muted); font-size:11px; text-align:right; }

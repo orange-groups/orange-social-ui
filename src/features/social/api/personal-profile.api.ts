@@ -6,6 +6,7 @@ export type PersonalProfile = {
   fullName: string
   bio: string | null
   dateOfBirth: string | null
+  coverUrl: string | null
 }
 
 export type PersonalProfilePatch = Partial<Pick<PersonalProfile, 'fullName' | 'bio' | 'dateOfBirth'>>
