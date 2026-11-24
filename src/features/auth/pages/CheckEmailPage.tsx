@@ -4,5 +4,6 @@ import { AuthLayout } from '../components/AuthLayout'
 
 export function CheckEmailPage() {
   const { t } = useTranslation('social')
-  return <AuthLayout title={t('auth.checkTitle')} description={t('auth.checkDescription')}><Link className="auth-submit" to="/reset-password?demo=1">{t('auth.openReset')}</Link></AuthLayout>
+  const { t: auth } = useTranslation('auth')
+  return <AuthLayout title={t('auth.checkTitle')} description={t('auth.checkDescription')}><Link className="auth-text-button" to="/login">{auth('recovery.back')}</Link></AuthLayout>
 }

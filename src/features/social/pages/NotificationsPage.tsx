@@ -1,19 +1,48 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { usePageTitle } from '../../../hooks/usePageTitle'
+import { useNotificationsInbox } from '../../notifications'
 import { SocialLayout } from '../components/SocialLayout'
 
-type Notice = { id: number; key: 'request' | 'reaction' | 'comment'; time: string; href: string; read: boolean }
-const initial: Notice[] = [
-  { id: 1, key: 'request', time: '10:24', href: '/friends', read: false },
-  { id: 2, key: 'reaction', time: '09:12', href: '/home', read: false },
-  { id: 3, key: 'comment', time: 'yesterday', href: '/home', read: true },
-]
 export function NotificationsPage() {
-  const { t } = useTranslation('social')
+  const { t, i18n } = useTranslation('social')
   usePageTitle(t('notifications.title'))
-  const [notices, setNotices] = useState(initial)
-  function mark(id: number) { setNotices(current => current.map(item => item.id === id ? { ...item, read: true } : item)) }
-  return <SocialLayout title={t('notifications.title')} description={t('notifications.description')}><section className="social-card"><div className="social-card-head"><h2>{t('notifications.inbox')} <span>{notices.filter(item => !item.read).length}</span></h2><button onClick={() => setNotices(current => current.map(item => ({ ...item, read: true })))}>{t('notifications.markAll')}</button></div><ul className="social-notices">{notices.map(item => <li className={item.read ? '' : 'unread'} key={item.id}><span className="social-notice-dot" /><div><Link to={item.href} onClick={() => mark(item.id)}>{t(`notifications.${item.key}`)}</Link><small>{item.time === 'yesterday' ? t('notifications.yesterday') : item.time}</small></div>{!item.read && <button onClick={() => mark(item.id)}>{t('notifications.markRead')}</button>}</li>)}</ul></section></SocialLayout>
+  const {
+    items, unreadCount, isLoading, listError, actionError, isUpdating,
+    canLoadMore, moreStatus, retry, markRead, loadMore,
+  } = useNotificationsInbox()
+  const formatTime = new Intl.DateTimeFormat(i18n.language, { dateStyle: 'medium', timeStyle: 'short' })
+
+  return <SocialLayout title={t('notifications.title')}>
+    <section className="social-card">
+      <div className="social-card-head">
+        <h2>{t('notifications.inbox')} {unreadCount !== null && <span>{unreadCount}</span>}</h2>
+        <button type="button" disabled={isUpdating || !unreadCount} onClick={() => void markRead()}>{t('notifications.markAll')}</button>
+      </div>
+      {isLoading && <p role="status">{t('notificationInbox.loading')}</p>}
+      {listError && <><p role="alert">{t('notificationInbox.loadError')}</p><button type="button" className="feed-primary" onClick={retry}>{t('personalProfile.retry')}</button></>}
+      {actionError && <p role="alert">{t('notificationInbox.updateError')}</p>}
+      {!isLoading && !listError && !items.length && <p>{t('notificationInbox.empty')}</p>}
+      <ul className="social-notices">{items.map(item => {
+        const { type, actor, target } = item
+        const key = type === 'friend_request_received' ? 'friendRequest'
+          : type === 'friend_request_accepted' ? 'friendAccepted'
+          : type === 'post_reacted' ? 'reaction'
+          : type === 'post_commented' ? 'comment' : null
+        const message = key && actor ? t(`notificationInbox.${key}`, { name: actor.fullName }) : item.content
+        const href = target?.type === 'friend_request' ? '/friends'
+          : target?.type === 'user' ? `/profile/${encodeURIComponent(target.id)}` : null
+        return <li className={item.isRead ? '' : 'unread'} key={item.id}>
+          <span className="social-notice-dot" aria-hidden="true" />
+          <div>
+            {href ? <Link to={href}>{message}</Link> : <span>{message}</span>}
+            <small><time dateTime={item.createdAt}>{formatTime.format(new Date(item.createdAt))}</time></small>
+          </div>
+          {!item.isRead && <button type="button" disabled={isUpdating} onClick={() => void markRead(item.id)}>{t('notifications.markRead')}</button>}
+        </li>
+      })}</ul>
+      {moreStatus === 'error' && <p role="alert">{t('notificationInbox.loadError')}</p>}
+      {canLoadMore && <button type="button" className="feed-primary" disabled={moreStatus === 'loading'} onClick={() => void loadMore()}>{t('notificationInbox.more')}</button>}
+    </section>
+  </SocialLayout>
 }

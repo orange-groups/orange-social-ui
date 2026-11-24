@@ -12,7 +12,8 @@ export function LoginForm() {
       <AuthField id="login-email" label={t('fields.email')} name="email" type="email" autoComplete="username" inputMode="email" autoCapitalize="none" spellCheck={false} placeholder={t('fields.emailPlaceholder')} required value={form.email} onChange={event => form.changeEmail(event.target.value)} error={form.errors.email ? t(form.errors.email) : undefined} />
       <AuthField id="login-password" label={t('fields.password')} name="password" type="password" autoComplete="current-password" placeholder={t('fields.passwordPlaceholder')} required value={form.password} onChange={event => form.changePassword(event.target.value)} error={form.errors.password ? t(form.errors.password) : undefined} />
       <div className="auth-form-options"><Link className="auth-text-button" to="/forgot-password">{t('login.forgot')}</Link></div>
-      <button className="auth-submit" type="submit">{t('login.submit')}<AuthIcon name="arrow" /></button>
+      {form.serverError && <p className="auth-field-error" role="alert">{t(form.serverError)}</p>}
+      <button className="auth-submit" type="submit" disabled={form.isSubmitting} aria-busy={form.isSubmitting}>{t(form.isSubmitting ? 'login.submitting' : 'login.submit')}<AuthIcon name="arrow" /></button>
     </form>
   )
 }

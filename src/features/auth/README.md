@@ -1,6 +1,18 @@
 # Auth UI preview
 
-Start with `npm run dev` and open `/login`. This feature is a client-side UI preview: valid forms navigate to `/preview`, without authenticating, creating accounts, sending email, or retaining credentials.
+Start with `npm run dev` and open `/login`. **Login and register call the backend** (`POST /auth/login`, `POST /auth/regis`); password recovery is still a UI preview.
+
+## Session (login, F5, logout)
+
+| Piece | Where |
+| --- | --- |
+| Access token (15 min) | Memory only, in `src/lib/api-client.ts`. Never in localStorage. |
+| Refresh token (1 day) | httpOnly cookie set by the backend, sent only to `/auth/*`. JS cannot read it. |
+| User + status | `session.store.ts` (`useSession()`): `checking` → `authenticated` / `guest`. |
+| F5 | `useRestoreSession()` in the router calls `POST /auth/refresh` on load; protected pages show "checking session" until it answers. |
+| Expired access token | `apiRequest` gets a 401, calls `/auth/refresh` once (shared by parallel requests), retries the request. |
+| Route guards | `ProtectedRoute` (app pages → `/login`, then back to the page you wanted), `GuestRoute` (`/login` → `/home` when signed in). |
+| Logout | `useLogout()` → `POST /auth/logout`, clears memory, goes to `/login`. |
 
 ## Routes
 

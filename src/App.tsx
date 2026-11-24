@@ -52,10 +52,11 @@ function App() {
         </button>
         <div className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
           <Link to="/login" onClick={() => setMenuOpen(false)}>{t('login')}</Link>
+          <Link to="/register" onClick={() => setMenuOpen(false)}>{t('register')}</Link>
           <a href="#inside" onClick={() => setMenuOpen(false)}>{t('inside')}</a>
           <a href="#values" onClick={() => setMenuOpen(false)}>{t('values')}</a>
           <a href="#community" onClick={() => setMenuOpen(false)}>{t('community')}</a>
-          <a className="button button-small button-dark" href="#join" onClick={() => setMenuOpen(false)}>{t('joinEarly')}</a>
+          <Link className="button button-small button-dark" to="/register" onClick={() => setMenuOpen(false)}>{t('register')}</Link>
         </div>
         <AppearanceControls />
       </nav>
